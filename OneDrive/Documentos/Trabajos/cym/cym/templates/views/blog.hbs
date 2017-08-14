@@ -1,0 +1,39 @@
+<div class="container blog">
+	<div class="row">
+		<div class="col-sm-8 col-md-9">
+			<div>
+				{{# each data.posts.results}}
+				<div data-ks-editable="{{#if ../user}}{{adminEditableUrl ../../user _id}}{{/if}}" class="post">
+					<h2><a href="{{postUrl slug}}" >{{{title}}}</a></h2>
+					<div class="row post-data">
+						<div class="col-md12">
+							<span class="glyphicon glyphicon-time no-margin" aria-hidden="true"></span> <span> {{date publishedDate format='DD MM YYYY'}}</span>
+							<span class="glyphicon glyphicon-tags" aria-hidden="true"></span> <span class="text-muted">{{{categoryList categories}}}</span>
+							<span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span> {{#if author.name.first}}{{author.name.first}}{{/if}}</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4 col-md-3">
+							{{#if image}}<img src="{{{cloudinaryUrl image width=160 height=160 crop='fit' }}}" class="post-img">{{/if}}
+						</div>
+						<div class="col-sm-8 col-md-9">
+							<p>{{{content.brief}}}</p>
+							{{#if content.extended}}<p class="read-more"><a href="{{postUrl slug}}" class="btn btn-primary" role="button">Leer mas...</a></p>{{/if}}
+						</div>
+					</div>
+				</div>
+				{{/each}}
+			</div>
+		</div>
+		<div class="col-sm-4 col-md-3">
+			<h2>Categorias</h2>
+			<div style="margin-top: 70px;" class="list-group">
+				<a href="/blog" class="active list-group-item">Todas las categorias</a>
+				{{# each data.categories }}
+				<a href="{{categoryUrl key}}" class="false list-group-item">{{name}}</a>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+	{{>pagination}}
+</div>
